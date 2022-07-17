@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import ru.ilichev.barakatestapp.R
 import ru.ilichev.barakatestapp.common.DelegateAdapter
-import ru.ilichev.barakatestapp.common.loadImage
 import ru.ilichev.barakatestapp.databinding.RawContentItemBinding
 import ru.ilichev.barakatestapp.databinding.TickerItemBinding
 import ru.ilichev.barakatestapp.feature.presentation.list.ItemViewTyped.TickersSection
@@ -34,7 +33,7 @@ object TickersDelegates {
                 binding.tvPrice.text = item.price
             } ?: run {
                 binding.tvPrice.text = item.price
-                binding.ivIcon.loadImage(item.symbolUrl)
+                binding.tvSymbol.text = item.symbol
             }
         }
     }

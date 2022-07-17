@@ -27,7 +27,7 @@ class TickersViewItemConverter @Inject constructor() : (List<Ticker>) -> List<It
 
     private fun mapToViewItem(model: Ticker): TickerItem = with(model) {
         TickerItem(
-            symbolUrl = stock,
+            symbol = stock,
             price = USD_PRICE_PATTERN.format(decimalFormat.format(price))
         )
     }

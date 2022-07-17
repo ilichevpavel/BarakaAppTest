@@ -29,7 +29,7 @@ class TickersItemCallback : DiffUtil.ItemCallback<ItemViewTyped.TickersSection.T
         oldItem: ItemViewTyped.TickersSection.TickerItem,
         newItem: ItemViewTyped.TickersSection.TickerItem
     ): Boolean {
-        return oldItem.symbolUrl == newItem.symbolUrl
+        return oldItem.symbol == newItem.symbol
     }
 
     override fun areContentsTheSame(
@@ -43,7 +43,7 @@ class TickersItemCallback : DiffUtil.ItemCallback<ItemViewTyped.TickersSection.T
         oldItem: ItemViewTyped.TickersSection.TickerItem,
         newItem: ItemViewTyped.TickersSection.TickerItem
     ): Any? {
-        return if (oldItem.symbolUrl == newItem.symbolUrl && oldItem.price != newItem.price) {
+        return if (oldItem.symbol == newItem.symbol && oldItem.price != newItem.price) {
             newItem
         } else {
             super.getChangePayload(oldItem, newItem)

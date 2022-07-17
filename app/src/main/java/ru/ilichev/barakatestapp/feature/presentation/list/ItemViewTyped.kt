@@ -5,7 +5,7 @@ sealed class ItemViewTyped {
     data class TickersSection(val tickers: List<TickerItem>) : ItemViewTyped() {
 
         data class TickerItem(
-            val symbolUrl: String,
+            val symbol: String,
             val price: String
         )
     }
