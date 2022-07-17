@@ -3,9 +3,13 @@ package ru.ilichev.barakatestapp.feature.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import ru.ilichev.barakatestapp.R
 import ru.ilichev.barakatestapp.common.DelegateAdapter
 import ru.ilichev.barakatestapp.common.setVisibility
@@ -21,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val contentAdapter = DelegateAdapter(ContentItemCallback()) {
         addDelegate(TickersDelegates.ContentWrapper())
         addDelegate(ShortNewsDelegate.ContentWrapper())
-        addDelegate(FullNewsDelegate.ContentWrapper())
+        addDelegate(FullNewsDelegate.ContentItem())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +33,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initViews()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect(::renderState)
+            }
+        }
     }
 
     private fun renderState(state: MainViewState) = with(binding) {

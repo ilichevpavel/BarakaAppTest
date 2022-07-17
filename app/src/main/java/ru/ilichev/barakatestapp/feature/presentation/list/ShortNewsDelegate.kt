@@ -27,7 +27,7 @@ object ShortNewsDelegate {
         }
 
     private fun ContentItem() =
-        adapterDelegate<ShortNewsItem, ShortNewsItem>(R.layout.full_news_item) {
+        adapterDelegate<ShortNewsItem, ShortNewsItem>(R.layout.short_news_item) {
             val binding = ShortNewsItemBinding.bind(itemView)
 
             bind {

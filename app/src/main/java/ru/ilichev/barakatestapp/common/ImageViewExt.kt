@@ -1,10 +1,10 @@
 package ru.ilichev.barakatestapp.common
 
 import android.widget.ImageView
-import com.bumptech.glide.Glide
+import coil.load
 
 fun ImageView.loadImage(
     url: String
 ) {
-    Glide.with(this).load(url).into(this)
+    load(url)
 }

@@ -7,7 +7,7 @@ class ContentItemCallback : DiffUtil.ItemCallback<ItemViewTyped>() {
     override fun areItemsTheSame(oldItem: ItemViewTyped, newItem: ItemViewTyped): Boolean {
         return when {
             oldItem is ItemViewTyped.TickersSection && newItem is ItemViewTyped.TickersSection -> true
-            oldItem is ItemViewTyped.FullNewsSection && newItem is ItemViewTyped.FullNewsSection -> true
+            oldItem is ItemViewTyped.FullNewsItem && newItem is ItemViewTyped.FullNewsItem -> oldItem.title == newItem.title
             oldItem is ItemViewTyped.ShortNewsSection && newItem is ItemViewTyped.ShortNewsSection -> true
             else -> false
         }
@@ -16,7 +16,7 @@ class ContentItemCallback : DiffUtil.ItemCallback<ItemViewTyped>() {
     override fun areContentsTheSame(oldItem: ItemViewTyped, newItem: ItemViewTyped): Boolean {
         return when {
             oldItem is ItemViewTyped.TickersSection && newItem is ItemViewTyped.TickersSection -> oldItem == newItem
-            oldItem is ItemViewTyped.FullNewsSection && newItem is ItemViewTyped.FullNewsSection -> oldItem == newItem
+            oldItem is ItemViewTyped.FullNewsItem && newItem is ItemViewTyped.FullNewsItem -> oldItem == newItem
             oldItem is ItemViewTyped.ShortNewsSection && newItem is ItemViewTyped.ShortNewsSection -> oldItem == newItem
             else -> false
         }
@@ -64,23 +64,6 @@ class ShortNewsItemCallback :
     override fun areContentsTheSame(
         oldItem: ItemViewTyped.ShortNewsSection.ShortNewsItem,
         newItem: ItemViewTyped.ShortNewsSection.ShortNewsItem
-    ): Boolean {
-        return oldItem == newItem
-    }
-}
-
-class FullNewsItemCallback : DiffUtil.ItemCallback<ItemViewTyped.FullNewsSection.FullNewsItem>() {
-
-    override fun areItemsTheSame(
-        oldItem: ItemViewTyped.FullNewsSection.FullNewsItem,
-        newItem: ItemViewTyped.FullNewsSection.FullNewsItem
-    ): Boolean {
-        return oldItem.title == newItem.title
-    }
-
-    override fun areContentsTheSame(
-        oldItem: ItemViewTyped.FullNewsSection.FullNewsItem,
-        newItem: ItemViewTyped.FullNewsSection.FullNewsItem
     ): Boolean {
         return oldItem == newItem
     }

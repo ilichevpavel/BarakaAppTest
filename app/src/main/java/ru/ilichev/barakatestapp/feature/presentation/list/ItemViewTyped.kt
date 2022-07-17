@@ -18,13 +18,10 @@ sealed class ItemViewTyped {
         )
     }
 
-    data class FullNewsSection(val news: List<FullNewsItem>) : ItemViewTyped() {
-
-        data class FullNewsItem(
-            val title: String,
-            val date: String,
-            val imageUrl: String,
-            val description: String
-        )
-    }
+    data class FullNewsItem(
+        val title: String,
+        val date: String,
+        val imageUrl: String,
+        val description: String
+    ) : ItemViewTyped()
 }
