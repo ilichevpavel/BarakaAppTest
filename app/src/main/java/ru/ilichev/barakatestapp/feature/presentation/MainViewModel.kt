@@ -21,18 +21,18 @@ class MainViewModel @Inject constructor(
     val state: StateFlow<MainViewState> = _state
 
     init {
-        subscribeToTickers()
+        subscribeToContentUpdate()
     }
 
     fun onAction(action: MainAction) {
         when (action) {
-           MainAction.OnReplyLoadingClicked -> {
-               // do something after error
-           }
+            MainAction.OnReplyLoadingClicked -> {
+                // do something after error
+            }
         }
     }
 
-    private fun subscribeToTickers() {
+    private fun subscribeToContentUpdate() {
         viewModelScope.launch {
             tickersRepository.loadTickers()
                 .combine(newsRepository.getNews()) { tickers, news ->

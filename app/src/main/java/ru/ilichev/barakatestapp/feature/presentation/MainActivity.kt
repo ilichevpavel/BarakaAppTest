@@ -45,25 +45,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun renderState(state: MainViewState) = with(binding) {
-        when (state) {
-            MainViewState.Loading -> {
-                progress.setVisibility(true)
-                errorStub.setVisibility(false)
-                rvContent.setVisibility(false)
-            }
-            MainViewState.Error -> {
-                progress.setVisibility(false)
-                errorStub.setVisibility(true)
-                rvContent.setVisibility(false)
-            }
-            is MainViewState.Content -> {
-                progress.setVisibility(false)
-                errorStub.setVisibility(false)
-                rvContent.setVisibility(true)
+        updateContentVisibility(state)
 
-                contentAdapter.items = state.items
-            }
+        if (state is MainViewState.Content) {
+            contentAdapter.items = state.items
         }
+    }
+
+    private fun updateContentVisibility(state: MainViewState) = with(binding) {
+        progress.setVisibility(state is MainViewState.Loading)
+        errorStub.setVisibility(state is MainViewState.Error)
+        rvContent.setVisibility(state is MainViewState.Content)
     }
 
     private fun initViews() = with(binding) {
